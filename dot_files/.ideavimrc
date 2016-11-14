@@ -1,0 +1,97 @@
+let mapleader="," " leader is now comma
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Editor settings
+set number
+set cursorline
+set showmatch
+set ruler
+set showcmd
+set wildmenu
+set magic
+syntax enable
+colorscheme elflord
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" tab control
+set tabstop=4
+set softtabstop=4
+set ai "auto indent
+filetype indent on
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" searching
+" "instant search
+set incsearch 
+" highlight searching
+set hlsearch
+set ignorecase
+set smartcase
+
+"turn off search highlight (, space)
+nnoremap <leader><space> :nohlsearch<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" moving around the line
+nnoremap B ^
+nnoremap e $ 
+
+" Treat long line as break lines
+map j gj
+map k gk
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Personal key mappings
+"
+" Fast saving
+nnoremap <leader>w :wa!<cr>
+
+" Fast quiting
+nnoremap <leader>q :q<cr>
+
+" Fast refresh
+nnoremap <leader>e :edit<cr>
+
+" Delete a line
+nnoremap <leader>d dd
+
+" Yank a line
+nnoremap <leader>y yy
+
+" see what's done in previous editing mode
+nnoremap gV `[v`]
+
+" go back from a tag
+nnoremap <C-t> :pop<cr>
+
+" Faster exit of edit mode
+inoremap jk <esc>
+inoremap jj <esc>
+
+" new tab edit with current buffer location
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Setting correct bahavior for backspace
+set backspace=indent,eol,start
+
+" Faster window switch
+map <silent> <A-Up> :wincmd k<CR>
+map <silent> <A-Down> :wincmd j<CR>
+map <silent> <A-Left> :wincmd h<CR>
+map <silent> <A-Right> :wincmd l<CR>
+
+" Fast resizing 
+nnoremap <leader>= :res +10<cr>
+nnoremap <leader>- :res -10<cr>
+nnoremap <leader>0 :vertical resize +10<cr>
+nnoremap <leader>9 :vertical resize -10<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto loading of sessions
+"
+" Make a session
+nnoremap <leader>s :mksession! ./ses.vim<cr>
+" Load a session
+nnoremap <leader>l :source ./ses.vim<cr>
+
+" gui settings
