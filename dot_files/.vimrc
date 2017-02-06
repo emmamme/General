@@ -1,37 +1,49 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle Plugin
-" set the runtime path to include Vundle and initialize
-" - to install: git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+"""""""""""""""""""""""""""""""""""""""""""""""
+" Use another package manager for neovim, installation:
+" curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \  
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+" Install for VIM: curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
+" Make sure you use single quotes
 
-Plugin 'tpope/vim-fugitive'
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
 
-Plugin 'git://git.wincent.com/command-t.git'
+" Multiple Plug commands can be written in a single line using | separators
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
-Plugin 'ascenator/L9', {'name': 'newL9'}
+" Using a non-master branch
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
-Plugin 'Valloric/YouCompleteMe'
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-Plugin 'rdnetto/YCM-Generator'
+" 
+Plug 'vim-scripts/c.vim'
 
-Plugin 'junegunn/vim-easy-align'
+" 
+Plug 'jiangmiao/auto-pairs'
 
-Plugin 'vim-scripts/c.vim'
+" Themes
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-Plugin 'jiangmiao/auto-pairs'
+Plug 'scrooloose/nerdtree'
+Plug 'lervag/vimtex'
+" Initialize plugin system
+call plug#end()
 
-Plugin 'scrooloose/nerdtree'
 
-
-call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -107,6 +119,9 @@ nnoremap <leader>w :wa!<cr>
 " Fast quiting
 nnoremap <leader>q :q<cr>
 
+" Fast vsp
+nnoremap <leader>v :vsp<cr>
+
 " Fast refresh
 " nnoremap <leader>e :edit<cr>
 
@@ -160,7 +175,7 @@ imap <leader>o :!open %<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""'""'
-set textwidth=80
+" set textwidth=80
 set colorcolumn=+1
 set matchpairs+=<:>
 
@@ -172,10 +187,15 @@ nnoremap <leader>s :mksession! ./ses.vim<cr>
 " Load a session
 nnoremap <leader>l :source ./ses.vim<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline_status-2.5.dev9999+git.cdd0cdbfee94238d38c1bef5f0548a4622518a05-py2.7.egg/powerline/bindings/vim
-set laststatus=2
-set t_Co=256
+""""""""""""""""""""""""""""""""""""""""""""""""
+" airline/powerline
+set laststatus=2 " Always display the statusline in all windows
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
+	" enable buffer
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
 
 """"""""""""""""""""""""""""""""""""""""""""""""
 " YCM Settings 
@@ -213,3 +233,9 @@ let g:ycm_min_num_of_chars_for_completion=1
 "不查询ultisnips提供的代码模板补全，如果需要，设置成1即可  
 let g:ycm_use_ultisnips_completer=0 
 
+" Easy align
+" " Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

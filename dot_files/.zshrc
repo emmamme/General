@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/chenluyuan/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # setting lang variable
 export LC_ALL=en_US.UTF-8
@@ -138,4 +138,6 @@ alias m="mv -fv"
 alias ff="find ./ | xargs grep"
 alias ag='alias | grep '
 
+alias cpd="ls -lt ~/Downloads/* | head -1 | awk '{print $9}' | sed 's/.*\///' | awk '{print \"cp ~/Downloads/\" \$1 \" ./\" \$1}' | sh"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
